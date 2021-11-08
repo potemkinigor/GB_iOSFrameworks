@@ -8,5 +8,6 @@ target 'GB_iOSFrameworks' do
   # Pods for GB_iOSFrameworks
   
   pod 'GoogleMaps', '5.2.0'
+  pod 'RealmSwift', '~>10'
 
 end

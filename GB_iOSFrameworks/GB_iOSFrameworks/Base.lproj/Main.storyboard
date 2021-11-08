@@ -16,24 +16,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVC-jS-pea">
-                                <rect key="frame" x="333" y="840" width="56" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGa-gC-ObC">
+                                <rect key="frame" x="161" y="840" width="93" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Start"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Start track"/>
                                 <connections>
-                                    <action selector="didTapLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v6Q-pT-Ohv"/>
+                                    <action selector="didTapStartTrackButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kGv-oW-sR8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVC-jS-pea">
+                                <rect key="frame" x="269" y="840" width="120" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Stop track"/>
+                                <connections>
+                                    <action selector="didTapStopTrackLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cn1-f0-v18"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAr-uf-VFF">
+                                <rect key="frame" x="15" y="840" width="131" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Restore last root"/>
+                                <connections>
+                                    <action selector="didTapRestoreLastRootButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YPI-55-THZ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="uAr-uf-VFF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="Iqc-0j-Gqd"/>
+                            <constraint firstItem="xVC-jS-pea" firstAttribute="leading" secondItem="kGa-gC-ObC" secondAttribute="trailing" constant="15" id="LPF-sz-Q1F"/>
+                            <constraint firstAttribute="bottom" secondItem="uAr-uf-VFF" secondAttribute="bottom" constant="25" id="QcU-1D-z0C"/>
+                            <constraint firstAttribute="bottom" secondItem="kGa-gC-ObC" secondAttribute="bottom" constant="25" id="SzK-lv-jj9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xVC-jS-pea" secondAttribute="trailing" constant="25" id="jlD-bv-H1r"/>
+                            <constraint firstItem="kGa-gC-ObC" firstAttribute="leading" secondItem="uAr-uf-VFF" secondAttribute="trailing" constant="15" id="lf5-1h-fi5"/>
                             <constraint firstAttribute="bottom" secondItem="xVC-jS-pea" secondAttribute="bottom" constant="25" id="ykk-ed-8Gs"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="locationButton" destination="xVC-jS-pea" id="ZMO-ak-mm1"/>
+                        <outlet property="restoreLastRootButton" destination="uAr-uf-VFF" id="3ZF-ex-d4f"/>
+                        <outlet property="startTrackButton" destination="kGa-gC-ObC" id="bzi-n5-kzF"/>
+                        <outlet property="stopTrackButton" destination="xVC-jS-pea" id="bH7-L3-35N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
