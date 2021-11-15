@@ -17,6 +17,8 @@
 		84C723DC273140EC00805D98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C723DA273140EC00805D98 /* Main.storyboard */; };
 		84C723DE273140EE00805D98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C723DD273140EE00805D98 /* Assets.xcassets */; };
 		84C723E1273140EE00805D98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C723DF273140EE00805D98 /* LaunchScreen.storyboard */; };
+		84DB359F27424D2F00E82CA7 /* SceneDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB359E27424D2F00E82CA7 /* SceneDelegateExtensions.swift */; };
+		84DB35A22742510C00E82CA7 /* ViewSecurityBlurProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB35A12742510C00E82CA7 /* ViewSecurityBlurProtocol.swift */; };
 		84FBDF3B273932EE00321F79 /* LastRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDF3A273932EE00321F79 /* LastRoot.swift */; };
 		D974FCA842B388A98FFE0C99 /* Pods_GB_iOSFrameworks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9713582E32BB574652613E4B /* Pods_GB_iOSFrameworks.framework */; };
 /* End PBXBuildFile section */
@@ -36,6 +38,8 @@
 		84C723DD273140EE00805D98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84C723E0273140EE00805D98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84C723E2273140EE00805D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84DB359E27424D2F00E82CA7 /* SceneDelegateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateExtensions.swift; sourceTree = "<group>"; };
+		84DB35A12742510C00E82CA7 /* ViewSecurityBlurProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSecurityBlurProtocol.swift; sourceTree = "<group>"; };
 		84FBDF3A273932EE00321F79 /* LastRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastRoot.swift; sourceTree = "<group>"; };
 		9713582E32BB574652613E4B /* Pods_GB_iOSFrameworks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GB_iOSFrameworks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -140,9 +144,11 @@
 		84C723D3273140EC00805D98 /* GB_iOSFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84DB35A0274250E700E82CA7 /* GeneralProtocols */,
 				84A04C3B273A779D0014AB59 /* Router */,
 				84C723D4273140EC00805D98 /* AppDelegate.swift */,
 				84C723D6273140EC00805D98 /* SceneDelegate.swift */,
+				84DB359E27424D2F00E82CA7 /* SceneDelegateExtensions.swift */,
 				84A04C34273A6E940014AB59 /* Realm */,
 				84A04C35273A6EA50014AB59 /* Login */,
 				84A04C33273A6E810014AB59 /* Map */,
@@ -152,6 +158,14 @@
 				84C723E2273140EE00805D98 /* Info.plist */,
 			);
 			path = GB_iOSFrameworks;
+			sourceTree = "<group>";
+		};
+		84DB35A0274250E700E82CA7 /* GeneralProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				84DB35A12742510C00E82CA7 /* ViewSecurityBlurProtocol.swift */,
+			);
+			path = GeneralProtocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,7 +306,9 @@
 				84A04C3D273A77AA0014AB59 /* AppRouterProtocol.swift in Sources */,
 				84FBDF3B273932EE00321F79 /* LastRoot.swift in Sources */,
 				84A04C3F273A77C70014AB59 /* AppRouter.swift in Sources */,
+				84DB35A22742510C00E82CA7 /* ViewSecurityBlurProtocol.swift in Sources */,
 				84C723D5273140EC00805D98 /* AppDelegate.swift in Sources */,
+				84DB359F27424D2F00E82CA7 /* SceneDelegateExtensions.swift in Sources */,
 				84A04C32273A6D540014AB59 /* User.swift in Sources */,
 				84C723D7273140EC00805D98 /* SceneDelegate.swift in Sources */,
 			);
