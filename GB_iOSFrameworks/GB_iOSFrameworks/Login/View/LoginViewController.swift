@@ -109,3 +109,16 @@ class LoginViewController: UIViewController {
     }
     
 }
+
+extension LoginViewController: ViewSecurityBlurProtocol {
+    func blurSecuredTextFields() {
+        self.loginTF.layer.opacity = 0
+        self.passwordTF.layer.opacity = 0
+    }
+    
+    func unblurSecuredTextFields() {
+        self.loginTF.layer.opacity = 1
+        self.passwordTF.layer.opacity = 1
+    }
+    
+}
