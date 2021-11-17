@@ -7,22 +7,27 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var loginTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureButtons()
+        configureCredentialsBindings()
 
     }
     
     @IBAction func enterButtonPressed(_ sender: Any) {
-        if isTextFieldsEmpty() {
-            return
-        }
-        
         guard let login = loginTF.text,
               let password = passwordTF.text else { return }
         
@@ -41,10 +46,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func registerButtonPressed(_ sender: Any) {
-        if isTextFieldsEmpty() {
-            return
-        }
-        
         guard let login = loginTF.text,
               let password = passwordTF.text else { return }
         
@@ -61,16 +62,27 @@ class LoginViewController: UIViewController {
         
     }
     
-    private func isTextFieldsEmpty() -> Bool {
-        guard let login = loginTF.text,
-              let password = passwordTF.text else { return false }
-        
-        if login.isEmpty || password.isEmpty {
-            showAlert(title: "Некорректные данные",
-                      message: "Введите логин и/или пароль")
-        }
-        
-        return login.isEmpty || password.isEmpty
+    // MARK: - Privates
+    
+    private func configureButtons() {
+        loginButton.isHidden = true
+        registerButton.isHidden = true
+    }
+    
+    private func configureCredentialsBindings() {
+        Observable
+            .combineLatest(
+                self.loginTF.rx.text,
+                self.passwordTF.rx.text
+            )
+            .map { login, password in
+                return !(login ?? "").isEmpty && !(password ?? "").isEmpty
+            }
+            .bind { [weak loginButton, weak registerButton] isCorrectInput in
+                loginButton?.isHidden = !isCorrectInput
+                registerButton?.isHidden = !isCorrectInput
+            }
+            .disposed(by: disposeBag)
     }
     
     private func findUser(login: String) -> User? {

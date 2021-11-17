@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import RealmSwift
+import RxSwift
 
 class ViewController: UIViewController {
     
@@ -15,9 +16,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var startTrackButton: UIButton!
     @IBOutlet weak var stopTrackButton: UIButton!
     
-    var mapView: GMSMapView!
-    var locationManager: CLLocationManager?
+    let locationManager = MapLocationManager.instance
+    let disposedBag = DisposeBag()
     
+    var mapView: GMSMapView!
+     
     var beginBackgroundTask: UIBackgroundTaskIdentifier?
     
     var route: GMSPolyline?
@@ -62,7 +65,7 @@ class ViewController: UIViewController {
     @IBAction func didTapStartTrackButton(_ sender: Any) {
         if !isUpdatingLocation {
             cleanRoot()
-            self.locationManager?.startUpdatingLocation()
+            self.locationManager.startUpdatingLocation()
             self.isUpdatingLocation = true
         } else {
             self.showAlert(title: "Ошибка", message: "Обновление локации уже в процессе")
@@ -71,7 +74,7 @@ class ViewController: UIViewController {
     
     @IBAction func didTapStopTrackLocationButton(_ sender: Any) {
         if isUpdatingLocation {
-            self.locationManager?.stopUpdatingLocation()
+            self.locationManager.stopUpdatingLocation()
             let realm = try! Realm()
             try! realm.write {
                 let root = LastRoot()
@@ -91,16 +94,6 @@ class ViewController: UIViewController {
         self.view.bringSubviewToFront(self.restoreLastRootButton)
         self.view.bringSubviewToFront(self.startTrackButton)
         self.view.bringSubviewToFront(self.stopTrackButton)
-    }
-    
-    func configureLocationManager() {
-        self.locationManager = CLLocationManager()
-        self.locationManager?.delegate = self
-        self.locationManager?.allowsBackgroundLocationUpdates = true
-        self.locationManager?.pausesLocationUpdatesAutomatically = false
-        self.locationManager?.startMonitoringSignificantLocationChanges()
-        self.locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.locationManager?.requestWhenInUseAuthorization()
     }
     
     func deinitGoogleMaps() {
@@ -137,34 +130,33 @@ class ViewController: UIViewController {
         }
     }
     
-}
-
-extension ViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        routePath?.add(location.coordinate)
-        route?.path = routePath
-        
-        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
-        mapView.animate(to: position)
-        
-        let point = LastRootPoint()
-        point.lat = location.coordinate.latitude
-        point.long = location.coordinate.longitude
-        
-        self.rootCoordinates.append(point)
-        
-        beginBackgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
-            guard let self = self else { return }
-            UIApplication.shared.endBackgroundTask(self.beginBackgroundTask!)
-            self.beginBackgroundTask = .invalid
-        }
-        
-        print("Coordinates are: \(location.coordinate.latitude) \(location.coordinate.longitude)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+    private func configureLocationManager() {
+        locationManager
+            .location
+            .asObservable()
+            .bind { [weak self] location in
+                guard let location = location else { return }
+                self?.routePath?.add(location.coordinate)
+                self?.route?.path = self?.routePath
+                
+                let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+                self?.mapView.animate(to: position)
+                
+                let point = LastRootPoint()
+                point.lat = location.coordinate.latitude
+                point.long = location.coordinate.longitude
+                
+                self?.rootCoordinates.append(point)
+                
+                self?.beginBackgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+                    guard let self = self else { return }
+                    UIApplication.shared.endBackgroundTask(self.beginBackgroundTask!)
+                    self.beginBackgroundTask = .invalid
+                }
+                
+                print("Coordinates are: \(location.coordinate.latitude) \(location.coordinate.longitude)")
+            }
+            .disposed(by: disposedBag)
     }
     
 }
