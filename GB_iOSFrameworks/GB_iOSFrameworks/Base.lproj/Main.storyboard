@@ -66,18 +66,18 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nhr-nZ-H9z">
-                                <rect key="frame" x="10" y="545.5" width="394" height="31"/>
+                                <rect key="frame" x="10" y="545.5" width="394" height="0.0"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox7-2F-Qbj">
-                                        <rect key="frame" x="0.0" y="0.0" width="192" height="31"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox7-2F-Qbj">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Вход"/>
                                         <connections>
                                             <action selector="enterButtonPressed:" destination="PWA-OF-qgC" eventType="touchUpInside" id="lxJ-Vz-PwD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoD-kY-ZVX">
-                                        <rect key="frame" x="202" y="0.0" width="192" height="31"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yoD-kY-ZVX">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Регистрация"/>
                                         <connections>
@@ -100,8 +100,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="Ox7-2F-Qbj" id="ZV3-Lb-a1L"/>
                         <outlet property="loginTF" destination="O13-dc-PcW" id="JmV-a5-rCN"/>
                         <outlet property="passwordTF" destination="58N-ea-4x4" id="0QA-k7-Y2K"/>
+                        <outlet property="registerButton" destination="yoD-kY-ZVX" id="fJo-ad-Cwy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9q-I2-g6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
