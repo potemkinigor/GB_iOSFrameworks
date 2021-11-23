@@ -12,11 +12,18 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    let notificationManager = NotificationsManager.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         GMSServices.provideAPIKey("AIzaSyA4x8zKjvviMgxVP8HpuO7gIwEUj6zOL4E")
+        
+        notificationManager.areNotificationsAvailable {[weak self] available in
+            if available == nil {
+                self?.notificationManager.requestNotificationAuthorization()
+            }
+        }
         
         return true
     }
